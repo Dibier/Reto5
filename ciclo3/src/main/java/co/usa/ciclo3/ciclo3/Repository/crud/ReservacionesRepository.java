@@ -5,7 +5,10 @@
  */
 package co.usa.ciclo3.ciclo3.Repository.crud;
 
+import co.usa.ciclo3.ciclo3.Modelo.Cliente;
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
+import co.usa.ciclo3.ciclo3.Reportes.ContadorClientes;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +52,17 @@ public class ReservacionesRepository {
     
     return reservacionesCrudRepository.findAllByStartDateAfterAndStartDateBefore(a, b);
     
+    }
+    
+    public List<ContadorClientes> getTopClients(){
+    
+    List<ContadorClientes> res= new ArrayList<>();
+    List<Object[]> report= reservacionesCrudRepository.countTotalReservationByClient();
+    for(int i = 0; i<report.size(); i++){
+    
+    res.add(new ContadorClientes((Long)report.get(i)[1],(Cliente) report.get(i)[0]));
+    }
+    return res;
     }
     
 }

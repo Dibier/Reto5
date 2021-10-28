@@ -6,6 +6,7 @@
 package co.usa.ciclo3.ciclo3.Service;
 
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
+import co.usa.ciclo3.ciclo3.Reportes.ContadorClientes;
 import co.usa.ciclo3.ciclo3.Repository.crud.ReservacionesRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -127,6 +128,12 @@ public class ReservacionesService {
     return new ArrayList<>();
     
     }
+    }
+    
+    public List<ContadorClientes> getTopClients(){
+    
+    return reservacionesRepository.getTopClients();
+    
     }
     
     }

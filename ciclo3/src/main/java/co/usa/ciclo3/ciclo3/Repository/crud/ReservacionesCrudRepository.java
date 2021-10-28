@@ -8,6 +8,7 @@ package co.usa.ciclo3.ciclo3.Repository.crud;
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
 import java.util.Date;
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -18,5 +19,8 @@ public interface ReservacionesCrudRepository extends CrudRepository<Reservacione
     
     
     public List<Reservaciones> findAllByStartDateAfterAndStartDateBefore(Date dateOne, Date dateTwo);
+    
+    @Query("SELECT c.client, COUNT(c.client) FROM Reservaciones AS c group BY c.client ORDER BY COUNT(c.client)DESC")
+    public List<Object[]> countTotalReservationByClient(); 
     
 }
