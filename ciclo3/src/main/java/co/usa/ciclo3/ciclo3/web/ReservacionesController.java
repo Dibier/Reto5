@@ -6,9 +6,9 @@
 package co.usa.ciclo3.ciclo3.web;
 
 import co.usa.ciclo3.ciclo3.Modelo.Cliente;
-import co.usa.ciclo3.ciclo3.Modelo.ClienteReservaciones;
+import co.usa.ciclo3.ciclo3.Modelo.costum.ContadorCliente;
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
-import co.usa.ciclo3.ciclo3.Modelo.StatusReport;
+import co.usa.ciclo3.ciclo3.Modelo.costum.StatusReport;
 import co.usa.ciclo3.ciclo3.Service.ReservacionesService;
 import java.util.List;
 import java.util.Optional;
@@ -77,6 +77,7 @@ public class ReservacionesController {
         return reservacionesService.delete(id);
     }
 
+    //2020-01-01/2020-12-31
     @GetMapping("/report-dates/{dateOne}/{dateTwo}")
     public List<Reservaciones>getReservationDatePeriod(@PathVariable("dateOne")String dateOne,@PathVariable("dateTwo")String dateTwo){
     
@@ -84,14 +85,15 @@ public class ReservacionesController {
         
     }
     
-    @GetMapping("/report-satus")
+    @GetMapping("/report-status")
     public StatusReport getStatusReport() {
         return reservacionesService.getStatusReport();
     }
     
     @GetMapping("/report-clients")
-    public List<ClienteReservaciones> getTopClientes() {
-        return reservacionesService.getTopClientes();
+    public List<ContadorCliente> getReservationsReportsClients() {
+        
+        return reservacionesService.getTopClients();
     }
     
 }

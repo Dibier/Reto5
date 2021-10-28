@@ -1,19 +1,18 @@
-
-package co.usa.ciclo3.ciclo3.Modelo;
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package co.usa.ciclo3.ciclo3.Modelo.costum;
 
 /**
  *
- * Modelo de un objeto que reporta a través
- * de una consulta el número de reservaciones
- * completadas y el número de reservaciones 
- * canceladas.
+ * @author dibier
  */
-public class ReservacionesReportStatus {
+public class StatusReport {
     private Integer completed;
     private Integer cancelled;
 
-    public ReservacionesReportStatus(Integer completed, Integer cancelled) {
+    public StatusReport(Integer completed, Integer cancelled) {
         this.completed = completed;
         this.cancelled = cancelled;
     }
@@ -33,5 +32,5 @@ public class ReservacionesReportStatus {
     public void setCancelled(Integer cancelled) {
         this.cancelled = cancelled;
     }
- 
+    
 }

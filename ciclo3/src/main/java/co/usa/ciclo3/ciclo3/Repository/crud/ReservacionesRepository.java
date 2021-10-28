@@ -6,7 +6,7 @@
 package co.usa.ciclo3.ciclo3.Repository.crud;
 
 import co.usa.ciclo3.ciclo3.Modelo.Cliente;
-import co.usa.ciclo3.ciclo3.Modelo.ClienteReservaciones;
+import co.usa.ciclo3.ciclo3.Modelo.costum.ContadorCliente;
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,11 +58,11 @@ public class ReservacionesRepository {
     
     }
     
-    public List<ClienteReservaciones> getTopClientes() {
-        List<ClienteReservaciones> res = new ArrayList<>();
-        List<Object[]> report = reservacionesCrudRepository.countTotalReservacionesByCliente();
+    public List<ContadorCliente> getTopClients() {
+        List<ContadorCliente> res = new ArrayList<>();
+        List<Object[]> report = reservacionesCrudRepository.countTotalReservacionesByClient();
         for(int i=0; i<report.size(); i++) {
-            res.add(new ClienteReservaciones((Integer) report.get(i)[1], (Cliente) report.get(i)[0]));
+            res.add(new ContadorCliente((Integer) report.get(i)[1], (Cliente) report.get(i)[0]));
         }
         return res;
     }

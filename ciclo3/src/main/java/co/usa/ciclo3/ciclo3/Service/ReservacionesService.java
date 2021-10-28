@@ -6,9 +6,9 @@
 package co.usa.ciclo3.ciclo3.Service;
 
 import co.usa.ciclo3.ciclo3.Modelo.Cliente;
-import co.usa.ciclo3.ciclo3.Modelo.ClienteReservaciones;
+import co.usa.ciclo3.ciclo3.Modelo.costum.ContadorCliente;
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
-import co.usa.ciclo3.ciclo3.Modelo.StatusReport;
+import co.usa.ciclo3.ciclo3.Modelo.costum.StatusReport;
 import co.usa.ciclo3.ciclo3.Repository.crud.ReservacionesRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -103,8 +103,8 @@ public class ReservacionesService {
 
     }
     
-    public List<ClienteReservaciones> getTopClientes(){
-        return reservacionesRepository.getTopClientes();
+    public List<ContadorCliente> getTopClients(){
+        return reservacionesRepository.getTopClients();
     }
     
     public StatusReport getStatusReport() {
