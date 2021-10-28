@@ -7,6 +7,7 @@ package co.usa.ciclo3.ciclo3.Service;
 
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
 import co.usa.ciclo3.ciclo3.Reportes.ContadorClientes;
+import co.usa.ciclo3.ciclo3.Reportes.StatusReport;
 import co.usa.ciclo3.ciclo3.Repository.crud.ReservacionesRepository;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -121,7 +122,7 @@ public class ReservacionesService {
     
     if(aDate.before(bDate)){
         
-        return reservacionesRepository.getReservaPerdiodo(aDate, bDate);
+        return reservacionesRepository.getReservaPeriodo(aDate, bDate);
         
     }else{
     
@@ -136,4 +137,11 @@ public class ReservacionesService {
     
     }
     
+    public StatusReport getStatusReport() {
+        List<Reservaciones> completed = reservacionesRepository.getReservacionesByStatus("completed");
+        List<Reservaciones> cancelled = reservacionesRepository.getReservacionesByStatus("cancelled");
+        StatusReport s = new StatusReport(completed.size(), cancelled.size());
+        return s;
     }
+    
+}

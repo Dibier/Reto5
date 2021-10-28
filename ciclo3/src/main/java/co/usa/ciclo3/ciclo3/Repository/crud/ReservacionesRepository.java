@@ -48,7 +48,7 @@ public class ReservacionesRepository {
         reservacionesCrudRepository.delete(s);
     }
     
-    public List<Reservaciones> getReservaPerdiodo(Date a, Date b){
+    public List<Reservaciones> getReservaPeriodo(Date a, Date b){
     
     return reservacionesCrudRepository.findAllByStartDateAfterAndStartDateBefore(a, b);
     
@@ -63,6 +63,10 @@ public class ReservacionesRepository {
     res.add(new ContadorClientes((Long)report.get(i)[1],(Cliente) report.get(i)[0]));
     }
     return res;
+    }
+    
+    public List<Reservaciones> getReservacionesByStatus(String s) {
+        return reservacionesCrudRepository.findAllByStatus(s);
     }
     
 }
