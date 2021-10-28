@@ -5,6 +5,8 @@
  */
 package co.usa.ciclo3.ciclo3.Service;
 
+import co.usa.ciclo3.ciclo3.Modelo.Cliente;
+import co.usa.ciclo3.ciclo3.Modelo.ClienteReservaciones;
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
 import co.usa.ciclo3.ciclo3.Reportes.ContadorClientes;
 import co.usa.ciclo3.ciclo3.Reportes.StatusReport;
@@ -101,40 +103,40 @@ public class ReservacionesService {
         return false;
 
     }
+    
+    public List<ClienteReservaciones> getTopClientes(){
+        return reservacionesRepository.getTopClientes();
+    }
+   
+ 
 
     public List<Reservaciones>getReservaPeriodo(String dateA, String dateB){
     
-    SimpleDateFormat parser= new SimpleDateFormat("yyyy-MM-dd");
-    Date aDate= new Date();
-    Date bDate= new Date();
+        SimpleDateFormat parser= new SimpleDateFormat("yyyy-MM-dd");
+        Date aDate= new Date();
+        Date bDate= new Date();
     
-    try {
-    
-        aDate= parser.parse(dateA);
-        bDate= parser.parse(dateB);
-                
-    } 
-    catch(ParseException event){
-    
-        event.printStackTrace();
-    
-    }
-    
-    if(aDate.before(bDate)){
-        
-        return reservacionesRepository.getReservaPeriodo(aDate, bDate);
-        
-    }else{
-    
-    return new ArrayList<>();
-    
-    }
-    }
-    
-    public List<ContadorClientes> getTopClients(){
-    
-    return reservacionesRepository.getTopClients();
-    
+        try {
+
+            aDate= parser.parse(dateA);
+            bDate= parser.parse(dateB);
+
+        } 
+        catch(ParseException event){
+
+            event.printStackTrace();
+
+        }
+
+        if(aDate.before(bDate)){
+
+            return reservacionesRepository.getReservaPeriodo(aDate, bDate);
+
+        }else{
+
+            return new ArrayList<>();
+
+        }
     }
     
     public StatusReport getStatusReport() {
@@ -145,3 +147,4 @@ public class ReservacionesService {
     }
     
 }
+
