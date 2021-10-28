@@ -84,6 +84,7 @@ public class ReservacionesController {
         
     }
     
+
     @GetMapping("/report-satus")
     public StatusReport getStatusReport() {
         return reservacionesService.getStatusReport();
@@ -93,5 +94,5 @@ public class ReservacionesController {
     public List<ClienteReservaciones> getTopClientes() {
         return reservacionesService.getTopClientes();
     }
-    
+   
 }
