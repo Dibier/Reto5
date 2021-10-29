@@ -82,7 +82,7 @@
 		</plugins>
 	</build>
         
-        <!--Copiado hata projects-->
+        <!--Repositorio -->
         <repositories>
 		<repository>
 			<id>spring-milestones</id>

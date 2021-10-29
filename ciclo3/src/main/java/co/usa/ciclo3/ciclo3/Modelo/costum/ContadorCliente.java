@@ -4,19 +4,19 @@ package co.usa.ciclo3.ciclo3.Modelo.costum;
 import co.usa.ciclo3.ciclo3.Modelo.Cliente;
 
 public class ContadorCliente {
-    private Integer total;
+    private Long total;
     private Cliente client;
 
-    public ContadorCliente(Integer total, Cliente client) {
+    public ContadorCliente(Long total, Cliente client) {
         this.total = total;
         this.client = client;
     }
 
-    public Integer getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 

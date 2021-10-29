@@ -60,9 +60,9 @@ public class ReservacionesRepository {
     
     public List<ContadorCliente> getTopClients() {
         List<ContadorCliente> res = new ArrayList<>();
-        List<Object[]> report = reservacionesCrudRepository.countTotalReservationByClient();
+        List<Object[]> report = reservacionesCrudRepository.countTotalReservacionesByCliente();
         for(int i=0; i<report.size(); i++) {
-            res.add(new ContadorCliente((Integer) report.get(i)[1], (Cliente) report.get(i)[0]));
+            res.add(new ContadorCliente((Long) report.get(i)[1], (Cliente) report.get(i)[0]));
         }
         return res;
     }
