@@ -80,20 +80,18 @@ public class ReservacionesController {
     //2020-01-01/2020-12-31
     @GetMapping("/report-dates/{dateOne}/{dateTwo}")
     public List<Reservaciones>getReservationDatePeriod(@PathVariable("dateOne")String dateOne,@PathVariable("dateTwo")String dateTwo){
-    
         return reservacionesService.getReservaPeriodo(dateOne, dateTwo);
-        
     }
     
     @GetMapping("/report-status")
     public StatusReport getStatusReport() {
         return reservacionesService.getStatusReport();
     }
-    
+  
     @GetMapping("/report-clients")
     public List<ContadorCliente> getReservationsReportsClients() {
-        
         return reservacionesService.getTopClients();
     }
    
+
 }

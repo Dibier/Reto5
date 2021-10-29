@@ -5,7 +5,6 @@
  */
 package co.usa.ciclo3.ciclo3.Service;
 
-import co.usa.ciclo3.ciclo3.Modelo.Cliente;
 import co.usa.ciclo3.ciclo3.Modelo.costum.ContadorCliente;
 import co.usa.ciclo3.ciclo3.Modelo.Reservaciones;
 import co.usa.ciclo3.ciclo3.Modelo.costum.StatusReport;
@@ -103,16 +102,12 @@ public class ReservacionesService {
 
     }
     
+
     public List<ContadorCliente> getTopClients(){
         return reservacionesRepository.getTopClients();
     }
-    
-    public StatusReport getStatusReport() {
-        List<Reservaciones> completed = reservacionesRepository.getReservacionesByStatus("completed");
-        List<Reservaciones> cancelled = reservacionesRepository.getReservacionesByStatus("cancelled");
-        StatusReport s = new StatusReport(completed.size(), cancelled.size());
-        return s;
-    }
+   
+ 
 
     public List<Reservaciones>getReservaPeriodo(String dateA, String dateB){
     
@@ -134,7 +129,7 @@ public class ReservacionesService {
 
         if(aDate.before(bDate)){
 
-            return reservacionesRepository.getReservaPerdiodo(aDate, bDate);
+            return reservacionesRepository.getReservaPeriodo(aDate, bDate);
 
         }else{
 
@@ -143,5 +138,12 @@ public class ReservacionesService {
         }
     }
     
+    public StatusReport getStatusReport() {
+        List<Reservaciones> completed = reservacionesRepository.getReservacionesByStatus("completed");
+        List<Reservaciones> cancelled = reservacionesRepository.getReservacionesByStatus("cancelled");
+        StatusReport s = new StatusReport(completed.size(), cancelled.size());
+        return s;
+    }
+    
+}
 
- }
