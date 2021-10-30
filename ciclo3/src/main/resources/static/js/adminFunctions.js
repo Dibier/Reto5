@@ -2,13 +2,13 @@ var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
 
-function editar(){
+function editarAdmin(){
 
     var elemento={
         "idAdmin":idCarga,
-        "name":$("#name").val(),
-        "email":$("#email").val(),
-        "password":$("#password").val()
+        "name":$("#nameAdmin").val(),
+        "email":$("#emailAdmin").val(),
+        "password":$("#passwordAdmin").val()
     };
     
     var dataToSend=JSON.stringify(elemento);
@@ -32,14 +32,14 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            //limpiarFormularioAdmin();
+            consultarAdmin();
             idCarga=null;
         }
     });
 }
 
-function eliminar(idElemento){
+function eliminarAdmin(idElemento){
     var elemento={
         "idAdmin":idElemento
       };
@@ -65,13 +65,13 @@ function eliminar(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarAdmin();
         }
     });
 }
 
 
-function cargar(idItem){
+function cargarAdmin(idItem){
     $.ajax({    
         url : "http://localhost:8080/api/Admin/"+idItem,
         type : 'GET',
@@ -82,9 +82,9 @@ function cargar(idItem){
 
                 var misItems=json.items;
   
-          $("#name").val(json.name);
-          $("#email").val(json.email);
-          $("#password").val(json.password);
+          $("#nameAdmin").val(json.name);
+          $("#emailAdmin").val(json.email);
+          $("#passwordAdmin").val(json.password);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
           
@@ -97,32 +97,37 @@ function cargar(idItem){
 //////------------------
 
 
-function consultar(){
+function consultarAdmin(){
     $.ajax({
         url:"http://localhost:8080/api/Admin/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuesta(respuesta);
+            pintarRespuestaAdmin(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
-    let myTable="";
+function pintarRespuestaAdmin(respuesta){
+    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
         myTable+=`
-            <div class="card" style="width: 18rem;">
+            <div class="card m-2" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">${respuesta[i].name}</h5>
                     <a href="${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
-                    <p class="card-text">${respuesta[i].password}</p>
+                    <!-- p class="card-text">${respuesta[i].password}</p -->
+                    <div align="centre">
+                        <button class="btn btn-success" onclick="eliminarAdmin(${respuesta[i].idAdmin})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargarAdmin(${respuesta[i].idAdmin})">Cargar</button>
+                    </div>
                 </div>
             </div>`;   
          
     }
-    $("#resultados").html(myTable);
+    myTable+=`</div></div>`;
+    $("#resultadosAdmin").html(myTable);
     
     /**let myTable="<table border='1'>";
 
@@ -146,11 +151,11 @@ function pintarRespuesta(respuesta){
     $("#resultados").html(myTable);**/
 }
 
-function guardar(){
+function guardarAdmin(){
     let var2 = {
-        name:$("#name").val(),
-        email:$("#email").val(),
-        password:$("#password").val()
+        name:$("#nameAdmin").val(),
+        email:$("#emailAdmin").val(),
+        password:$("#passwordAdmin").val()
     };
     $.ajax({
         type:'POST',
@@ -162,8 +167,8 @@ function guardar(){
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
-            consultar();
+            //limpiarFormularioAdmin();
+            consultarAdmin();
         },
         error:function(jqXHR, textStatus, errorTrown){
             
@@ -173,8 +178,12 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
-    $("#name").val("");
-    $("#email").val("");
-    $("#password").val("");
+function limpiarFormularioAdmin(){
+    $("#nameAdmin").val("");
+    $("#emailAdmin").val("");
+    $("#passwordAdmin").val("");
 }
+
+$(document).ready(function(){
+    consultarAdmin();
+});

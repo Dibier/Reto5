@@ -2,14 +2,14 @@ var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
 
-function editar(){
+function editarCliente(){
 
     var elemento={
         idClient:idCarga,
-        name:$("#name").val(),
-        email:$("#email").val(),
-        age:$("#age").val(),
-        password:$("#password").val()
+        name:$("#nameCliente").val(),
+        email:$("#emailCliente").val(),
+        age:$("#ageCliente").val(),
+        password:$("#passwordCliente").val()
           
     };
     
@@ -36,14 +36,14 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
-            consultar();
+            limpiarFormularioCliente();
+            consultarCliente();
             idCarga=null;
         }
     });
 }
 
-function eliminar(idElemento){
+function eliminarCliente(idElemento){
     var elemento={
         "idClient":idElemento
       };
@@ -68,8 +68,8 @@ function eliminar(idElemento){
         
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
-            //limpiarFormulario();
-            consultar();
+            //limpiarFormularioCliente();
+            consultarCliente();
         }
     });
 }
@@ -78,7 +78,7 @@ function eliminar(idElemento){
 
 
 
-function cargar(idItem){
+function cargarCliente(idItem){
     $.ajax({    
         url : "http://localhost:8080/api/Client/"+idItem,
         type : 'GET',
@@ -89,10 +89,10 @@ function cargar(idItem){
 
                 var misItems=json.items;
   
-          $("#name").val(json.name);
-          $("#email").val(json.email);
-          $("#age").val(json.age);
-          $("#password").val(json.password);
+          $("#nameCliente").val(json.name);
+          $("#emailCliente").val(json.email);
+          $("#ageCliente").val(json.age);
+          $("#passwordCliente").val(json.password);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
   
@@ -104,42 +104,41 @@ function cargar(idItem){
 //////------------------
 
 
-function consultar(){
+function consultarCliente(){
     $.ajax({
         url:"http://localhost:8080/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuesta(respuesta);
+            pintarRespuestaCliente(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
-    let myTable="<table border='1'>";
-
-    myTable+="<thead>";
-    myTable+="<TR>";
-    myTable+="<th>"+"Nombre"+"</th>";
-    myTable+="<th>"+"Email"+"</th>";
-    myTable+="<th>"+"Edad"+"</th>";
-    myTable+="</TR>";
-    myTable+="</thead>";
+function pintarRespuestaCliente(respuesta){
+    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
-        myTable+="<tr>";
-        myTable+="<td>"+respuesta[i].name+"</td>";
-        myTable+="<td>"+respuesta[i].email+"</td>";
-        myTable+="<td>"+respuesta[i].age+"</td>";
-        myTable+="<td><button onclick='eliminar("+respuesta[i].idClient+")'>Borrar</button></td>";
-        myTable+="<td><button onclick='cargar("+respuesta[i].idClient+")'>Cargar</button></td>";
-        myTable+="</tr>";
+        myTable+=`
+            <div class="card m-2" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${respuesta[i].name}</h5>
+                    <a href="mailto:${respuesta[i].email}" class="card-link">${respuesta[i].email}</a>
+                    <p class="card-text">${respuesta[i].age} años</p>
+                    <div align="centre">
+                        <button class="btn btn-success" onclick="eliminarCliente(${respuesta[i].idClient})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargarCliente(${respuesta[i].idClient})">Cargar</button>
+                    </div>
+                </div>
+            </div>`;   
+         
     }
-    myTable+="</table>";
-    $("#resultados").html(myTable);
+    myTable+=`</div></div>`;
+    $("#resultadosCliente").html(myTable);
+    
 }
 
-function guardar(){
+function guardarCliente(){
     let var2 = {
         name:$("#name").val(),
         email:$("#email").val(),
@@ -156,8 +155,8 @@ function guardar(){
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
-            consultar();
+            //limpiarFormulario();
+            consultarCliente();
         },
         error:function(jqXHR, textStatus, errorTrown){
             window.location.reload();
@@ -167,9 +166,13 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
-    $("#name").val("");
-    $("#email").val("");
-    $("#age").val("");
-    $("#password").val("");
+function limpiarFormularioCliente(){
+    $("#nameCliente").val("");
+    $("#emailCliente").val("");
+    $("#ageCliente").val("");
+    $("#passwordCliente").val("");
 }
+
+$(document).ready(function(){
+    consultarCliente();
+});

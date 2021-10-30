@@ -17,7 +17,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Specialty/update',
+        url: 'http://129.151.116.109:9090/api/Specialty/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -52,7 +52,7 @@ function eliminar(idElemento){
         data : dataToSend,
         
        
-        url : "http://129.151.116.109:8080/api/Specialty/"+idElemento,
+        url : "http://129.151.116.109:9090/api/Specialty/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -69,48 +69,10 @@ function eliminar(idElemento){
     });
 }
 
-/*function buscarPorID(idItem){
-
-    var id = idItem; 
-    $.ajax({    
-        url : 'https://ga9c9b6eca3f530-db202109271959.adb.sa-santiago-1.oraclecloudapps.com/ords/admin/doctor/doctor/'+id.val(),
-        type : 'GET',
-        dataType : 'json',        
-
-        success : function(json) {
-                $("#resultados").empty();
-               
-                console.log(json.items[0].id +" $"+json.items[0].name);
-                console.log("no se puedo ");
-
-                var misItems=json.items;
-                    
-                
-                 
-                  $("#resultados").append("<tr>");
-                  $("#resultados").append("<td>"+misItems[0].id+" || "+ "</td>");
-                  $("#resultados").append("<td>"+misItems[0].specialty+" || "+"</td>");
-                  $("#resultados").append("<td>"+misItems[0].graduate_year+" || "+"</td>");
-                  $("#resultados").append("<td>"+misItems[0].department_id+" || "+"</td>");
-                  $("#resultados").append("<td>"+misItems[0].name+" || "+"</td>");
-                  $("#resultados").append('<td><button onclick="eliminar('+misItems[0].id+')">Borrar</button></td>');
-                  $("#resultados").append('<td><button onclick="obtenerItemEspecifico('+misItems[0].id+')">Cargar</button></td>');
-                  $("#resultados").append("</tr>");
-        
-                
-
-        },
-        
-        complete : function(xhr, status) {
-            alert('Petición realizada '+xhr.status);
-        }
-    });
-}*/ // No se necesita
-
 
 function cargar(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Specialty/"+idItem,
+        url : "http://129.151.116.109:9090/api/Specialty/"+idItem,
         type : 'GET',
         dataType : 'json',        
         
@@ -132,7 +94,7 @@ function cargar(idItem){
 
 function consultar(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Specialty/all",
+        url:"http://129.151.116.109:9090/api/Specialty/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -141,7 +103,7 @@ function consultar(){
         }
     });
 }
-consultar();
+//consultar();
 
 function pintarRespuesta(respuesta){
     let myTable="<table border='1'>";
@@ -173,7 +135,7 @@ function guardar(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:8080/api/Specialty/save",
+        url:"http://129.151.116.109:9090/api/Specialty/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
@@ -182,7 +144,7 @@ function guardar(){
             consultar();
         },
         error:function(jqXHR, textStatus, errorTrown){
-            window.location.reload();
+            //window.location.reload();
             console.log("No se guardó");
             alert("No se guardó correctamente");
         }
