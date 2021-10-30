@@ -2,7 +2,7 @@ var idCarga; // Guarda el Id del elemento cuando se da click en el botón cargar
 
 
 
-function editar(){
+function editarDoctor(){
 
     var elemento={
         "id":idCarga,
@@ -34,14 +34,14 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            //limpiarFormulario();
-            consultar();
+            limpiarFormularioDoctor();
+            consultarDoctor();
             idCarga=null;
         }
     });
 }
 
-function eliminar(idElemento){
+function eliminarDoctor(idElemento){
     var elemento={
         "id":idElemento
       };
@@ -67,7 +67,7 @@ function eliminar(idElemento){
         complete : function(xhr, status) {
            //lert('Petición realizada '+xhr.status);
             //limpiarFormulario();
-            consultar();
+            consultarDoctor();
         }
     });
 }
@@ -75,7 +75,7 @@ function eliminar(idElemento){
 
 
 
-function cargar(idItem){
+function cargarDoctor(idItem){
     $.ajax({    
         url : "http://localhost:8080/api/Doctor/"+idItem,
         type : 'GET',
@@ -98,19 +98,19 @@ function cargar(idItem){
 //////------------------
 
 
-function consultar(){
+function consultarDoctor(){
     $.ajax({
         url:"http://localhost:8080/api/Doctor/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
-            pintarRespuesta(respuesta);
+            pintarRespuestaDoctor(respuesta);
         }
     });
 }
 
-function pintarRespuesta(respuesta){
+function pintarRespuestaDoctor(respuesta){
     
     let myTable=`<div class="container" style="width: 100%"><div class="row">`;
     for(i=0; i<respuesta.length; i++) {
@@ -123,8 +123,8 @@ function pintarRespuesta(respuesta){
                     <p class="card-text">${respuesta[i].description}</p>
                     <p class="card-text">${respuesta[i].specialty.name}</p>
                     <div align="centre">
-                        <button class="btn btn-success" onclick="eliminar(${respuesta[i].id})">Borrar</button>
-                        <button class="btn btn-success" onclick="cargar(${respuesta[i].id})">Cargar</button>
+                        <button class="btn btn-success" onclick="eliminarDoctor(${respuesta[i].id})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargarDoctor(${respuesta[i].id})">Cargar</button>
                     </div>
                 </div>
             </div>`;   
@@ -160,7 +160,7 @@ function pintarRespuesta(respuesta){
     $("#resultados").html(myTable);**/
 }
 
-function guardar(){
+function guardarDoctor(){
     let var2 = {
         name:$("#nameDoctor").val(),
         department:$("#departmentDoctor").val(),
@@ -179,7 +179,7 @@ function guardar(){
             //alert("Se guardó correctametne..");
             //window.location.reload();
             //limpiarFormulario();
-            consultar();
+            consultarDoctor();
         },
         error:function(jqXHR, textStatus, errorTrown){
             window.location.reload();
@@ -189,7 +189,7 @@ function guardar(){
     });
 }
 
-function limpiarFormulario(){
+function limpiarFormularioDoctor(){
     $("#nameDoctor").val("");
     $("#departmentDoctor").val("");
     $("#yearDoctor").val("");
@@ -198,5 +198,5 @@ function limpiarFormulario(){
 }
 
 $(document).ready(function(){
-    consultar();
+    consultarDoctor();
 });
