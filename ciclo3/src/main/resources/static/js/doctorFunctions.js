@@ -6,11 +6,11 @@ function editar(){
 
     var elemento={
         "id":idCarga,
-        "name":$("#name").val(),
-        "department":$("#department").val(),
-        "year":$("#year").val(),
-        "description":$("#description").val(),
-        "specialty":{"id":$("#specialty").val()}
+        "name":$("#nameDoctor").val(),
+        "department":$("#departmentDoctor").val(),
+        "year":$("#yearDoctor").val(),
+        "description":$("#descriptionDoctor").val(),
+        "specialty":{"id":$("#specialtyDoctor").val()}
     };
     
     var dataToSend=JSON.stringify(elemento);
@@ -20,7 +20,7 @@ function editar(){
        
         data: dataToSend,
         
-        url: 'http://129.151.116.109:8080/api/Doctor/update',
+        url: 'http://localhost:8080/api/Doctor/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -34,7 +34,7 @@ function editar(){
         
         complete : function(xhr, status) {
             //alert('Petición realizada '+xhr.status);
-            limpiarFormulario();
+            //limpiarFormulario();
             consultar();
             idCarga=null;
         }
@@ -55,7 +55,7 @@ function eliminar(idElemento){
         data : dataToSend,
         
        
-        url : "http://129.151.116.109:8080/api/Doctor/"+idElemento,
+        url : "http://localhost:8080/api/Doctor/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -77,18 +77,18 @@ function eliminar(idElemento){
 
 function cargar(idItem){
     $.ajax({    
-        url : "http://129.151.116.109:8080/api/Doctor/"+idItem,
+        url : "http://localhost:8080/api/Doctor/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
         success : function(json) {               
                 console.log(json);
   
-          $("#name").val(json.name);
-          $("#department").val(json.department);
-          $("#year").val(json.year);
-          $("#description").val(json.description);
-          $("#specialty").val(json.specialty.id);
+          $("#nameDoctor").val(json.name);
+          $("#departmentDoctor").val(json.department);
+          $("#yearDoctor").val(json.year);
+          $("#descriptionDoctor").val(json.description);
+          $("#specialtyDoctor").val(json.specialty.id);
           idCarga = idItem;
           console.log("idCarga es " +idCarga);
         }
@@ -100,7 +100,7 @@ function cargar(idItem){
 
 function consultar(){
     $.ajax({
-        url:"http://129.151.116.109:8080/api/Doctor/all",
+        url:"http://localhost:8080/api/Doctor/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -111,8 +111,29 @@ function consultar(){
 }
 
 function pintarRespuesta(respuesta){
-   
-    let myTable="<table border=1>";
+    
+    let myTable=`<div class="container" style="width: 100%"><div class="row">`;
+    for(i=0; i<respuesta.length; i++) {
+        myTable+=`
+            <div class="card m-2" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">${respuesta[i].name}</h5>
+                    <p class="card-text">${respuesta[i].department}</p>
+                    <p class="card-text">Año ${respuesta[i].year}</p>
+                    <p class="card-text">${respuesta[i].description}</p>
+                    <p class="card-text">${respuesta[i].specialty.name}</p>
+                    <div align="centre">
+                        <button class="btn btn-success" onclick="eliminar(${respuesta[i].id})">Borrar</button>
+                        <button class="btn btn-success" onclick="cargar(${respuesta[i].id})">Cargar</button>
+                    </div>
+                </div>
+            </div>`;   
+         
+    }
+    myTable+=`</div></div>`;
+    $("#resultadosDoctor").html(myTable);
+    
+    /**let myTable="<table border=1>";
 
     myTable+="<thead>";
     myTable+="<TR>";
@@ -136,28 +157,28 @@ function pintarRespuesta(respuesta){
         myTable+="</tr>";
     }
     myTable+="</table>";
-    $("#resultados").html(myTable);
+    $("#resultados").html(myTable);**/
 }
 
 function guardar(){
     let var2 = {
-        name:$("#name").val(),
-        department:$("#department").val(),
-        year:$("#year").val(),
-        description:$("#description").val(),
-        specialty:{"id":$("#specialty").val()}
+        name:$("#nameDoctor").val(),
+        department:$("#departmentDoctor").val(),
+        year:$("#yearDoctor").val(),
+        description:$("#descriptionDoctor").val(),
+        specialty:{"id":$("#specialtyDoctor").val()}
     };
     $.ajax({
         type:'POST',
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://129.151.116.109:8080/api/Doctor/save",
+        url:"http://localhost:8080/api/Doctor/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
             //window.location.reload();
-            limpiarFormulario();
+            //limpiarFormulario();
             consultar();
         },
         error:function(jqXHR, textStatus, errorTrown){
@@ -169,9 +190,13 @@ function guardar(){
 }
 
 function limpiarFormulario(){
-    $("#name").val("");
-    $("#department").val("");
-    $("#year").val("");
-    $("#description").val("");
-    $("#specialty").val("");
+    $("#nameDoctor").val("");
+    $("#departmentDoctor").val("");
+    $("#yearDoctor").val("");
+    $("#descriptionDoctor").val("");
+    $("#specialtyDoctor").val("");
 }
+
+$(document).ready(function(){
+    consultar();
+});
