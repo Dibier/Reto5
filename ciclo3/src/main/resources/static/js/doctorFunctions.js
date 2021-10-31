@@ -20,7 +20,7 @@ function editarDoctor(){
        
         data: dataToSend,
         
-        url: 'http://localhost:8080/api/Doctor/update',
+        url: 'http://129.151.117.196:8080/api/Doctor/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -55,7 +55,7 @@ function eliminarDoctor(idElemento){
         data : dataToSend,
         
        
-        url : "http://localhost:8080/api/Doctor/"+idElemento,
+        url : "http://129.151.117.196:8080/api/Doctor/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -77,7 +77,7 @@ function eliminarDoctor(idElemento){
 
 function cargarDoctor(idItem){
     $.ajax({    
-        url : "http://localhost:8080/api/Doctor/"+idItem,
+        url : "http://129.151.117.196:8080/api/Doctor/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -101,7 +101,7 @@ function cargarDoctor(idItem){
 
 function consultarDoctor(){
     $.ajax({
-        url:"http://localhost:8080/api/Doctor/all",
+        url:"http://129.151.117.196:8080/api/Doctor/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -148,7 +148,7 @@ function guardarDoctor(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://localhost:8080/api/Doctor/save",
+        url:"http://129.151.117.196:8080/api/Doctor/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
@@ -176,7 +176,7 @@ function limpiarFormularioDoctor(){
 
 function consultarSpecialtyDoctor(){
     $.ajax({
-        url:"http://localhost:8080/api/Specialty/all",
+        url:"http://129.151.117.196:8080/api/Specialty/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){

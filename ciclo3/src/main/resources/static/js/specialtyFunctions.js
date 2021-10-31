@@ -17,7 +17,7 @@ function editarSpecialty(){
        
         data: dataToSend,
         
-        url: 'http://localhost:8080/api/Specialty/update',
+        url: 'http://129.151.117.196:8080/api/Specialty/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -52,7 +52,7 @@ function eliminarSpecialty(idElemento){
         data : dataToSend,
         
        
-        url : "http://localhost:8080/api/Specialty/"+idElemento,
+        url : "http://129.151.117.196:8080/api/Specialty/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -72,7 +72,7 @@ function eliminarSpecialty(idElemento){
 
 function cargarSpecialty(idItem){
     $.ajax({    
-        url : "http://localhost:8080/api/Specialty/"+idItem,
+        url : "http://129.151.117.196:8080/api/Specialty/"+idItem,
         type : 'GET',
         dataType : 'json',        
         
@@ -94,7 +94,7 @@ function cargarSpecialty(idItem){
 
 function consultarSpecialty(){
     $.ajax({
-        url:"http://localhost:8080/api/Specialty/all",
+        url:"http://129.151.117.196:8080/api/Specialty/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -153,7 +153,7 @@ function guardarSpecialty(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://localhost:8080/api/Specialty/save",
+        url:"http://129.151.117.196:8080/api/Specialty/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");

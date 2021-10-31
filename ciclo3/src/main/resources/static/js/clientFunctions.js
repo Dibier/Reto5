@@ -22,7 +22,7 @@ function editarCliente(){
        
         data: dataToSend,
         
-        url: 'http://localhost:8080/api/Client/update',
+        url: 'http://129.151.117.196:8080/api/Client/update',
         
         type: 'PUT',
         contentType:'application/json',
@@ -57,7 +57,7 @@ function eliminarCliente(idElemento){
         data : dataToSend,
         
        
-        url : "http://localhost:8080/api/Client/"+idElemento,
+        url : "http://129.151.117.196:8080/api/Client/"+idElemento,
         type: 'DELETE',
         contentType:'application/json',
         success : function(json, textStatus, xhr) {
@@ -80,7 +80,7 @@ function eliminarCliente(idElemento){
 
 function cargarCliente(idItem){
     $.ajax({    
-        url : "http://localhost:8080/api/Client/"+idItem,
+        url : "http://129.151.117.196:8080/api/Client/"+idItem,
         type : 'GET',
         dataType : 'JSON',        
 
@@ -106,7 +106,7 @@ function cargarCliente(idItem){
 
 function consultarCliente(){
     $.ajax({
-        url:"http://localhost:8080/api/Client/all",
+        url:"http://129.151.117.196:8080/api/Client/all",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -150,7 +150,7 @@ function guardarCliente(){
         contentType:"application/json; charset=utf-8",
         dataType: 'JSON',
         data: JSON.stringify(var2),
-        url:"http://localhost:8080/api/Client/save",
+        url:"http://129.151.117.196:8080/api/Client/save",
         success:function(respose) {
             console.log("Se guardó correctamente");
             //alert("Se guardó correctametne..");
